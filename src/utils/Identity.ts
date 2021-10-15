@@ -10,13 +10,26 @@ const poolData = {
 
 export const cognitoUserPool = new CognitoUserPool(poolData);
 
-export const parseUserAtributes = (values) => {
+export type LoginObject = {
+  name: string;
+  passwor: string;
+  birthdate: any;
+  address: string;
+  email: string;
+  gender: string;
+  password: string;
+};
+
+export const parseUserAtributes = (values: LoginObject) => {
   const UserAtributes = Object.keys(values)
     .filter((key) => key !== "password")
     .map((key) => {
       const userAtributesData = {
         Name: key,
-        Value: key == "birthdate" ? values[key].format("L") : values[key],
+        Value:
+          key == "birthdate" && values[key]
+            ? values[key].format("L")
+            : values[key],
       };
       return new CognitoUserAttribute(userAtributesData);
     });

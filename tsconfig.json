@@ -35,7 +35,7 @@
       "hooks": ["./src/hooks"],
       "global": ["./src/global"],
       "data": ["./src/data"],
-      "utilities": ["./src/utilities"],
+      "utils": ["./src/utils"],
       "copy": ["./src/copy"],
       "img": ["./src/img"],
       "types": ["./src/types"],

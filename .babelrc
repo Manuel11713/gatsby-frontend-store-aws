@@ -1,0 +1,30 @@
+{
+  "presets": ["babel-preset-gatsby", "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "import-globals",
+      {
+        "styled": "styled-components",
+        "ReactNode": { "moduleName": "react", "exportName": "ReactNode" }
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "analytics": "./src/analytics",
+          "components": "./src/components",
+          "styles": "./src/styles",
+          "hooks": "./src/hooks",
+          "global": "./src/global",
+          "data": "./src/data",
+          "utils": "./src/utils",
+          "copy": "./src/copy",
+          "img": "./src/img",
+          "types": "./src/types",
+        }
+      }
+    ]
+  ]
+}

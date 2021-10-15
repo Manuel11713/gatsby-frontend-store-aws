@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { LoginForm, SignUpForm } from "../components/inputs";
+import { LoginForm, SignUpForm } from "components/Inputs";
 
 const Login = () => {
-  const [showLogin, setShowLoign] = useState(false);
+  const [showLogin, setShowLoign] = useState(true);
 
   return (
-    <LoginStyles>{showLogin ? <LoginForm /> : <SignUpForm />}</LoginStyles>
+    <LoginStyles>
+      {showLogin ? (
+        <LoginForm setShowLoign={setShowLoign} />
+      ) : (
+        <SignUpForm setShowLoign={setShowLoign} />
+      )}
+    </LoginStyles>
   );
 };
 

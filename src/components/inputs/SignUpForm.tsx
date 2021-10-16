@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Typography, DatePicker, Form, Input, Button, Select } from "antd";
 import { CustomCard } from "components/elements";
 const { Title } = Typography;
 const { Option } = Select;
-import { LoginObject } from "utils";
+import { ISignUpObject } from "utils";
 import { useUser } from "components/providers";
 
 export const SignUpForm = ({ setShowLoign }) => {
   const { signUp } = useUser();
 
-  const onFinish = (values: LoginObject) => signUp(values);
+  const onFinish = (values: ISignUpObject) => signUp(values);
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);

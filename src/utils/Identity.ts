@@ -10,7 +10,7 @@ const poolData = {
 
 export const cognitoUserPool = new CognitoUserPool(poolData);
 
-export type LoginObject = {
+export type ISignUpObject = {
   name: string;
   passwor: string;
   birthdate: any;
@@ -20,7 +20,12 @@ export type LoginObject = {
   password: string;
 };
 
-export const parseUserAtributes = (values: LoginObject) => {
+export type ILogInObject = {
+  name: string;
+  password: string;
+};
+
+export const parseUserAtributes = (values: ISignUpObject) => {
   const UserAtributes = Object.keys(values)
     .filter((key) => key !== "password")
     .map((key) => {

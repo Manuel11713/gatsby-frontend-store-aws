@@ -1,33 +1,14 @@
 import React from "react";
 import { Typography, Form, Input, Button } from "antd";
 const { Title } = Typography;
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import { CustomCard } from "components/elements";
-import { cognitoUserPool } from "utils";
 import styled from "styled-components";
+import { useUser } from "components/providers";
+import { ILogInObject } from "utils";
 
 export const LoginForm = ({ setShowLoign }) => {
-  const onFinish = (values) => {
-    // const user = new CognitoUser({
-    //   Username: values.name,
-    //   Pool: cognitoUserPool,
-    // });
-    // const authDetails = new AuthenticationDetails({
-    //   Username: values.name,
-    //   Password: values.password,
-    // });
-    // user.authenticateUser(authDetails, {
-    //   onSuccess: (session) => {
-    //     console.log("onSuccess: ", session.getAccessToken().getJwtToken());
-    //   },
-    //   onFailure: (err) => {
-    //     console.log("onFail: ", err);
-    //   },
-    //   newPasswordRequired: (data) => {
-    //     console.log("new pass: ", data);
-    //   },
-    // });
-  };
+  const { login } = useUser();
+  const onFinish = (values: ILogInObject) => login(values);
   return (
     <CustomCard>
       <FormStyles>

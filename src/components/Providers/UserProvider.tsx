@@ -1,19 +1,77 @@
-import React, { FC, useContext, createContext, useState } from "react";
-import { parseUserAtributes, cognitoUserPool, LoginObject } from "utils";
+import React, {
+  FC,
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+} from "react";
+import {
+  parseUserAtributes,
+  cognitoUserPool,
+  ISignUpObject,
+  ILogInObject,
+} from "utils";
 import { useNotification } from "components/providers";
+import {
+  CognitoUser,
+  AuthenticationDetails,
+  CognitoUserAttribute,
+} from "amazon-cognito-identity-js";
 import { navigate } from "gatsby";
 
-const initialValues = {
-  signUp: (values: LoginObject) => {},
+type IinitialValues = {
+  signUp: (values: ISignUpObject) => void;
+  login: (values: ILogInObject) => void;
+  logOut: () => void;
+  user: undefined | CognitoUserAttribute[];
+};
+
+const initialValues: IinitialValues = {
+  signUp: (values: ISignUpObject) => {
+    values;
+  },
+  login: (values: ILogInObject) => {
+    values;
+  },
+  logOut: () => {},
+  user: undefined,
 };
 
 const UserContext = createContext(initialValues);
 
 export const UserProvdier: FC = ({ children }) => {
-  //   const [user, setUser] = useState();
+  const [user, setUser] = useState<undefined | CognitoUserAttribute[]>();
   const { showNotitication } = useNotification();
+  const login = (values: ILogInObject) => {
+    const cognitoUser = new CognitoUser({
+      Username: values.name,
+      Pool: cognitoUserPool,
+    });
 
-  const signUp = (values: LoginObject) => {
+    const authDetails = new AuthenticationDetails({
+      Username: values.name,
+      Password: values.password,
+    });
+
+    cognitoUser.authenticateUser(authDetails, {
+      onSuccess: () => {
+        cognitoUser.getUserAttributes((err, attributes) => {
+          if (err || !attributes)
+            return showNotitication("Error getting user attributes");
+          setUser(attributes);
+          navigate("/");
+        });
+      },
+      onFailure: (err) => {
+        console.log("onFail: ", err);
+      },
+      newPasswordRequired: (data) => {
+        console.log("new pass: ", data);
+      },
+    });
+  };
+
+  const signUp = (values: ISignUpObject) => {
     const UserAtributes = parseUserAtributes(values);
 
     cognitoUserPool.signUp(
@@ -33,8 +91,31 @@ export const UserProvdier: FC = ({ children }) => {
     );
   };
 
+  const logOut = () => {
+    const userCognito = cognitoUserPool.getCurrentUser();
+    if (userCognito) userCognito.signOut();
+  };
+
+  const getUser = () => {
+    const userCognito = cognitoUserPool.getCurrentUser();
+    if (userCognito) {
+      userCognito.getSession(() => {
+        userCognito.getUserAttributes((err, attributes) => {
+          if (err || !attributes) return;
+          setUser(attributes);
+        });
+      });
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
-    <UserContext.Provider value={{ signUp }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ signUp, login, user, logOut }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 

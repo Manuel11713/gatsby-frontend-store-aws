@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { LoginForm, SignUpForm } from "components/Inputs";
+import { useUser } from "components/providers";
+import { navigate } from "gatsby-link";
 
 const Login = () => {
   const [showLogin, setShowLoign] = useState(true);
-
+  const { user } = useUser();
+  if (user) navigate("/");
   return (
     <LoginStyles>
       {showLogin ? (

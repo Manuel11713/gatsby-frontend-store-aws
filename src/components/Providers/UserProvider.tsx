@@ -93,7 +93,10 @@ export const UserProvdier: FC = ({ children }) => {
 
   const logOut = () => {
     const userCognito = cognitoUserPool.getCurrentUser();
-    if (userCognito) userCognito.signOut();
+    if (userCognito) {
+      userCognito.signOut();
+      setUser(undefined);
+    }
   };
 
   const getUser = () => {

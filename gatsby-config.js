@@ -7,5 +7,11 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "gatsby-cognito",
   },
-  plugins: [`gatsby-plugin-typescript`, `gatsby-plugin-layout`],
+  plugins: [
+    `gatsby-plugin-typescript`,
+    `gatsby-plugin-layout`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+  ],
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 import Button from "@mui/material/Button";
 import { Link } from "gatsby";
-import { useUser } from "src/providers";
+import { useUser } from "providers";
 
 const Header = () => {
   const { user, logOut } = useUser();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { LoginForm, SignUpForm } from "components/Inputs";
-import { useUser } from "src/providers";
+import { LoginForm, SignUpForm } from "components/inputs";
+import { useUser } from "providers";
 import { navigate } from "gatsby-link";
 
 const Login = () => {

@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "components/Header";
+import Header from "components/header";
 import "styles/index.css";
-import { GlobalProvider } from "src/providers";
+import { GlobalProvider } from "providers";
 
 const MainLayout = ({ children, location }) => {
   return (

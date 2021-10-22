@@ -12,7 +12,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import { useUser } from "src/providers";
+import { useUser } from "providers";
 import dayjs from "dayjs";
 
 export const SignUpForm = ({ setShowLoign }) => {

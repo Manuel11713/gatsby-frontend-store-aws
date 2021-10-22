@@ -17,7 +17,7 @@
           "components": "./src/components",
           "styles": "./src/styles",
           "hooks": "./src/hooks",
-          "global": "./src/global",
+          "providers": "./src/providers",
           "data": "./src/data",
           "utils": "./src/utils",
           "copy": "./src/copy",

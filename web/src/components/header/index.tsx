@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
-import { Button } from "antd";
+import Button from "@mui/material/Button";
 import { Link } from "gatsby";
 import { useUser } from "components/providers";
 
@@ -21,12 +21,12 @@ const Header = () => {
         />
       </Link>
       {user ? (
-        <Button type="primary" size="large" onClick={() => logOut()}>
+        <Button variant="contained" size="large" onClick={() => logOut()}>
           Log out
         </Button>
       ) : (
         <Link to="/login">
-          <Button type="primary" size="large">
+          <Button variant="contained" size="large">
             Sign In
           </Button>
         </Link>

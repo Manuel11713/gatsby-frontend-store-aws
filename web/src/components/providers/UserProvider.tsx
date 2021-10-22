@@ -81,6 +81,7 @@ export const UserProvdier: FC = ({ children }) => {
       UserAtributes,
       (err, _) => {
         if (err) {
+          console.log(err);
           return showNotitication(
             "You must fill all fields, please!!",
             "error"

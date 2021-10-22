@@ -15,6 +15,11 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@date-io/dayjs": "^2.11.0",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/lab": "^5.0.0-alpha.51",
+    "@mui/material": "^5.0.4",
     "amazon-cognito-identity-js": "^5.2.1",
     "antd": "^4.16.13",
     "babel-loader": "^8.2.3",

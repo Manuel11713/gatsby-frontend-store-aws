@@ -1,35 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Typography, DatePicker, Form, Input, Button, Select } from "antd";
 import { CustomCard } from "components/elements";
-const { Title } = Typography;
-const { Option } = Select;
-import { ISignUpObject } from "utils";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateAdapter from "@mui/lab/AdapterDayjs";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 import { useUser } from "components/providers";
+import dayjs from "dayjs";
 
 export const SignUpForm = ({ setShowLoign }) => {
   const { signUp } = useUser();
 
-  const onFinish = (values: ISignUpObject) => signUp(values);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthdate, setBirthdate] = React.useState(
+    dayjs("2014-08-18T21:11:54")
+  );
+  const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      name,
+      email,
+      birthdate: birthdate.format("DD/MM/YYYY"),
+      gender,
+      address,
+      password,
+    };
+    signUp(data);
   };
-
   return (
     <CustomCard>
       <FormStyles>
         <div>
-          <Title className="center-text" level={2}>
+          <Typography align="center" variant="h4" gutterBottom component="div">
             Sign Up Form
-          </Title>
+          </Typography>
         </div>
+        <Box onSubmit={onSubmit} component="form" noValidate autoComplete="off">
+          <TextField
+            label="Name"
+            variant="outlined"
+            sx={{ marginBottom: 2 }}
+            onChange={(e) => setName(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Email"
+            variant="outlined"
+            sx={{ marginBottom: 2 }}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+          />
+          <div className="date-picker">
+            <LocalizationProvider dateAdapter={DateAdapter}>
+              <DesktopDatePicker
+                label="Date desktop"
+                inputFormat="DD/MM/YYYY"
+                value={birthdate}
+                onChange={(newValue) => setBirthdate(newValue)}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </div>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              value={gender}
+              label="Age"
+              onChange={(e) => setGender(e.target.value)}
+              sx={{ marginBottom: 2 }}
+              fullWidth
+            >
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </FormControl>
 
-        <Form
+          <TextField
+            label="Address"
+            variant="outlined"
+            sx={{ marginBottom: 2 }}
+            onChange={(e) => setAddress(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Password"
+            variant="outlined"
+            type="password"
+            sx={{ marginBottom: 2 }}
+            onChange={(e) => setPassword(e.target.value)}
+            fullWidth
+          />
+
+          <Button
+            fullWidth
+            type="submit"
+            variant="contained"
+            sx={{ marginBottom: 2 }}
+          >
+            Login
+          </Button>
+          <small
+            className="link-back"
+            onClick={() => {
+              setShowLoign(true);
+            }}
+          >
+            Already have an account ?
+          </small>
+        </Box>
+
+        {/* <Form
           name="basic"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item name="name">
@@ -73,18 +171,21 @@ export const SignUpForm = ({ setShowLoign }) => {
           >
             Already have an account ?
           </small>
-        </Form>
+        </Form> */}
       </FormStyles>
     </CustomCard>
   );
 };
 
 const FormStyles = styled.div`
-  .ant-picker {
-    width: 100%;
-  }
   .link-back {
     cursor: pointer;
     color: var(--primaryColor);
+  }
+  .date-picker {
+    margin-bottom: 16px;
+    .MuiFormControl-root {
+      width: 100%;
+    }
   }
 `;

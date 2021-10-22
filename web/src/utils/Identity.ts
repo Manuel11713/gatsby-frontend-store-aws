@@ -12,7 +12,6 @@ export const cognitoUserPool = new CognitoUserPool(poolData);
 
 export type ISignUpObject = {
   name: string;
-  passwor: string;
   birthdate: any;
   address: string;
   email: string;
@@ -31,10 +30,7 @@ export const parseUserAtributes = (values: ISignUpObject) => {
     .map((key) => {
       const userAtributesData = {
         Name: key,
-        Value:
-          key == "birthdate" && values[key]
-            ? values[key].format("L")
-            : values[key],
+        Value: values[key],
       };
       return new CognitoUserAttribute(userAtributesData);
     });

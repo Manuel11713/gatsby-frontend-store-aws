@@ -1,11 +1,13 @@
 import React, { FC, createContext, useContext, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import MuiAlert, { AlertProps, AlertColor } from "@mui/material/Alert";
 
 type MessageTypes = "info" | "error" | "warning" | "success";
 
 const initialValues = {
-  showNotitication: (message: string, type: MessageTypes = "info") => {},
+  showNotitication: (message: string, type: MessageTypes = "info") => {
+    message + type;
+  },
 };
 
 const NotificationContext = createContext(initialValues);
@@ -20,8 +22,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 export const NotificationProvider: FC = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [messageSnack, setMessageSnack] = useState("");
-  const [severity, setSeverity] = useState("success");
-  const handleClose = (event, reason) => {
+  const [severity, setSeverity] = useState<AlertColor>("success");
+  const handleClose = (_?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }

@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.css";
 import Header from "components/Header";
 import "styles/index.css";
 import { GlobalProvider } from "components/providers";

@@ -26,7 +26,11 @@ const Header = () => {
         </Button>
       ) : (
         <Link to="/login">
-          <Button variant="contained" size="large">
+          <Button
+            variant="contained"
+            size="large"
+            style={{ display: "inline-block" }}
+          >
             Sign In
           </Button>
         </Link>

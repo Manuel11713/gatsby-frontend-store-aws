@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { CustomCard } from "components/elements";
 import styled from "styled-components";
-import { useUser } from "components/providers";
+import { useUser } from "src/providers";
 
 export const LoginForm = ({ setShowLoign }) => {
   const { login } = useUser();

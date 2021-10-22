@@ -11,7 +11,7 @@ import {
   ISignUpObject,
   ILogInObject,
 } from "utils";
-import { useNotification } from "components/providers";
+import { useNotification } from "src/providers";
 import {
   CognitoUser,
   AuthenticationDetails,

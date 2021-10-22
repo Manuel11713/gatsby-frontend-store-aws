@@ -1,0 +1,19 @@
+{
+  "name": "gatsby-cognito",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Manuel11713/gatsby-frontend-store-bikes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Manuel11713/gatsby-frontend-store-bikes/issues"
+  },
+  "homepage": "https://github.com/Manuel11713/gatsby-frontend-store-bikes#readme"
+}

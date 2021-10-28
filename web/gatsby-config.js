@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
-    title: "gatsby-cognito",
+    title: "gatsby-ecommerce-aws",
   },
   plugins: [
     `gatsby-plugin-typescript`,
@@ -16,7 +16,16 @@ module.exports = {
     {
       resolve: `gatsby-source-stripe`,
       options: {
-        objects: ["Price"],
+        objects: [
+          "Balance",
+          "BalanceTransaction",
+          "Product",
+          "ApplicationFee",
+          "Sku",
+          "Subscription",
+          "Price",
+        ],
+
         secretKey: process.env.GATSBY_STRIPE_SECRET_KEY,
         downloadFiles: true,
       },

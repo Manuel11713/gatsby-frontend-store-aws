@@ -1,6 +1,6 @@
 import React from "react";
-import { SplitSection } from "components/sections";
-import { Typography, Button } from "@mui/material";
+import { SplitSection, ListCurrencies } from "components/sections";
+import { Typography, Button, Grid, Container } from "@mui/material";
 import { graphql, Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
@@ -33,6 +33,38 @@ const HomePage = ({ data }) => {
           </>
         }
       />
+      <div style={{ background: "#33691e", color: "#fff", padding: 20 }}>
+        <Container>
+          <Grid container>
+            <Grid item xs={12} md={4}>
+              <Typography align="center" variant="h6">
+                462T
+              </Typography>
+              <Typography align="center" variant="subtitle2">
+                Quarterly volume traded
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Typography align="center" variant="h6">
+                100+
+              </Typography>
+              <Typography align="center" variant="subtitle2">
+                Quarterly volume traded
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Typography align="center" variant="h6">
+                100+M
+              </Typography>
+              <Typography align="center" variant="subtitle2">
+                Verified users
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+
+      <ListCurrencies />
     </div>
   );
 };

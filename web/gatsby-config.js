@@ -14,6 +14,13 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `img`,
+        path: `${__dirname}/src/img/`,
+      },
+    },
+    {
       resolve: `gatsby-source-stripe`,
       options: {
         objects: [
@@ -28,6 +35,14 @@ module.exports = {
 
         secretKey: process.env.GATSBY_STRIPE_SECRET_KEY,
         downloadFiles: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: process.env.GATSBY_BUCKET_NAME,
+        enableS3StaticWebsiteHosting: false,
+        acl: null,
       },
     },
   ],

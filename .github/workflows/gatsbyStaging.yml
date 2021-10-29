@@ -1,0 +1,45 @@
+name: Build Gatsby Site to Staging
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [staging]
+
+  repository_dispatch:
+    types: [publish-event]
+
+jobs:
+  build:
+    name: Build Gatsby Site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      #https://github.com/styfle/cancel-workflow-action#readme
+      - name: "Cancel workflow in Staging"
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          ignore_sha: true
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.GITHUBACTION_ECOMMERCE_WEBSITE_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.GITHUBACTION_ECOMMERCE_WEBSITE_AWS_SECRET_ACCESS_KEY}}
+          aws-region: us-east-1
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: "14"
+
+      - name: deploy
+        env:
+          GATSBY_COGNITO_USER_POOL_ID: ${{ secrets.GATSBY_COGNITO_USER_POOL_ID }}
+          GATSBY_COGNITO_CLIENT_ID: ${{ secrets.GATSBY_COGNITO_CLIENT_ID }}
+          GATSBY_STRIPE_SECRET_KEY: ${{ secrets.GATSBY_STRIPE_SECRET_KEY }}
+          GATSBY_STRIPE_PUBLISH_KEY: ${{ secrets.GATSBY_STRIPE_PUBLISH_KEY }}
+          GATSBY_BUCKET_NAME: company-crypto-exchange-staging
+
+        run: npm run deploy

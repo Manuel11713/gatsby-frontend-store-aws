@@ -12,7 +12,9 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "deploy": "npm run build && gatsby-plugin-s3 deploy -y"
+
   },
   "dependencies": {
     "@date-io/dayjs": "^2.11.0",
@@ -24,6 +26,7 @@
     "@stripe/react-stripe-js": "^1.6.0",
     "@stripe/stripe-js": "^1.20.3",
     "amazon-cognito-identity-js": "^5.2.1",
+    "axios": "^0.24.0",
     "babel-loader": "^8.2.3",
     "babel-plugin-import-globals": "^2.0.0",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -32,6 +35,7 @@
     "gatsby": "^4.0.0",
     "gatsby-plugin-image": "^2.0.0",
     "gatsby-plugin-layout": "^3.0.0",
+    "gatsby-plugin-s3": "^0.3.8",
     "gatsby-plugin-sharp": "^4.0.0",
     "gatsby-plugin-styled-components": "^5.0.0",
     "gatsby-plugin-typescript": "^4.0.0",
@@ -41,5 +45,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.15"
   }
 }

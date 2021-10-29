@@ -37,5 +37,13 @@ module.exports = {
         downloadFiles: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: process.env.GATSBY_BUCKET_NAME,
+        enableS3StaticWebsiteHosting: false,
+        acl: null,
+      },
+    },
   ],
 };
